@@ -1,18 +1,18 @@
 class RomanNumerals
     def convert(number)
+        
         roman_number = "I" * number 
-        roman_number = roman_number.gsub("I"*1000, "M")
-        roman_number = roman_number.gsub("I"*500, "D")
-        roman_number = roman_number.gsub("I"*100, "C")
-        roman_number = roman_number.gsub("I"*50, "L")
-        roman_number = roman_number.gsub("I"*10, "X")
-        roman_number = roman_number.gsub("I"*5, "V")
-        roman_number = roman_number.gsub("DCCCC", "CM")
-        roman_number = roman_number.gsub("CCCC", "CD")
-        roman_number = roman_number.gsub("LXXXX", "XC")
-        roman_number = roman_number.gsub("XXXX", "XL")
-        roman_number = roman_number.gsub("VIIII", "IX")
-        roman_number = roman_number.gsub("IIII", "IV")
+
+        equivalences = {'M' => 1000, 'D' => 500, 'C' => 100, 'L' => 50, 'X' => 10, 'V' => 5}
+        equivalences.each do |letter, number|
+            roman_number = roman_number.gsub("I" * number, letter)
+        end
+
+        exceptions = { 'DCCCC' => 'CM', 'CCCC' => 'CD', 'LXXXX' => 'XC', 'XXXX' => 'XL', 'VIIII' => 'IX', 'IIII' => 'IV' }
+        exceptions.each do |wrong, correct|
+            roman_number = roman_number.gsub(wrong, correct)
+        end 
+        
         return roman_number
     end
 end
